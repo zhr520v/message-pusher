@@ -41,7 +41,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: justsong/message-pusher
+          images: zhr520v/message-pusher
 
       - name: Build and push Docker images to Docker Hub
         uses: docker/build-push-action@v3
