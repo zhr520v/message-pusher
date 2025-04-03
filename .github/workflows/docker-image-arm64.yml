@@ -22,8 +22,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Save version info
-        run: |
-          git describe --tags > VERSION 
+        run: echo "v0.4.12" > VERSION
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
