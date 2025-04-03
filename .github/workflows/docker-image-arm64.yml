@@ -9,9 +9,10 @@ on:
       name:
         description: 'reason'
         required: false
+
 jobs:
-  push_to_registries:
-    name: Push Docker image to multiple registries
+  push_to_dockerhub:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -36,22 +37,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: |
-            justsong/message-pusher
-            ghcr.io/${{ github.repository }}
+          images: justsong/message-pusher
 
-      - name: Build and push Docker images
+      - name: Build and push Docker images to Docker Hub
         uses: docker/build-push-action@v3
         with:
           context: .
